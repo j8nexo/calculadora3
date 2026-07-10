@@ -1,5 +1,6 @@
 package com.javiertapiador.calculadora3.controller;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -28,5 +29,15 @@ public class CalculadoraController {
         }
         else{
             return    (double) a / b; }
+
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<String> manejarIllegalArgumentException(
+            IllegalArgumentException ex) {
+
+        return ResponseEntity
+                .badRequest()
+                .body(ex.getMessage());
     }
 }
